@@ -38,7 +38,8 @@ filmesRoutes.post("/filme", async (request, response) => {
 filmesRoutes.put("/filme/:id", async (req, res) => {
     const { id } = req.params;
     const { titulo, descricao, data_lancamento, diretor } = req.body;
-  
+    
+
     try {
       const filme = await Filme.findOne({ where: { id: id } });
         

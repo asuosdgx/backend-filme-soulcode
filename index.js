@@ -1,5 +1,7 @@
 import { connection, authenticate } from "./config/database.js";
 import { filmesRoutes } from "./routes/filmes.routes.js";
+import { diretorRoutes } from "./routes/diretor.routes.js";
+import { atorRoutes } from "./routes/ator.routes.js";
 import express from "express";
 
 authenticate(connection).then( () => {
@@ -8,8 +10,9 @@ authenticate(connection).then( () => {
 })
 const app = express();
 app.use(express.json());
-app.use(filmesRoutes)
-
+app.use(filmesRoutes);
+app.use(diretorRoutes);
+app.use(atorRoutes);
 
 
 const PORT = 3333;
