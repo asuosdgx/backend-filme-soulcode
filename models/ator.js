@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 
 export const Ator = connection.define("ator", {
     nome: {
-        type: DataTypes.STRING(130),
+        type: DataTypes.STRING(140),
         allowNull: false
     },
     nascimento: {
@@ -11,7 +11,7 @@ export const Ator = connection.define("ator", {
         allowNull: false
     },
     nacionalidade: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(30),
         allowNull: false
     }
 });
