@@ -4,6 +4,7 @@ import { Filme } from "../models/filme.js";
 
 export const atorRoutes = Router();
 
+//Listagem
 atorRoutes.get("/ator", async (request, response)=> {
     const atores = await Ator.findAll();
     return response.json(atores)
@@ -14,7 +15,7 @@ atorRoutes.get("/ator/:id", async (request, response)=> {
     const ator = await Ator.findOne({ where: {id: id}, include: [Filme] });
     return response.json(ator)
 })
-
+//Criação
 atorRoutes.post("/ator", async (request, response) => {
     const {nome, nascimento, nacionalidade, filmeId} = request.body
     
@@ -27,7 +28,7 @@ atorRoutes.post("/ator", async (request, response) => {
         return response.status(500).json({ message: "Um erro ocorreu ao inserir Ator" })
     }
 })
-
+//Update
 atorRoutes.put("/ator/:id", async (req, res) => {
     const { id } = req.params;
     const { nome, nascimento, nacionalidade, filmeId } = req.body;
@@ -46,7 +47,7 @@ atorRoutes.put("/ator/:id", async (req, res) => {
       res.status(500).json({message: "Ocorreu um erro ao atualizar o Ator."});
     }
 })
-
+//Delete
 atorRoutes.delete("/ator/:id", async (request, response) => {
     const { id } = request.params;
     try{
