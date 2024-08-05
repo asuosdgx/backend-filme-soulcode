@@ -8,11 +8,8 @@ diretorRoutes.get("/diretor", async (request, response) => {
   return response.json(diretores);
 });
 
-diretorRoutes.get("/diretor/:id", async (request, response) => {
-  const { id } = request.params;
-  const diretor = await Diretor.findOne({
-    where: { id: id },
-    include: [Filme],
-  });
-  return response.json(diretor);
-});
+diretorRoutes.get("/diretor/:id", async (req, res)=> {
+  const { id } = req.params
+  const diretor = await Diretor.findOne({ where: {id: id}, include: [Filme] });
+  return res.json(diretor)
+})
