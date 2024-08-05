@@ -1,7 +1,7 @@
 import { connection } from "../config/database.js";
 import { DataTypes } from "sequelize";
 
-// criaçãp da tabela do diretor
+// criação da tabela do diretor
 export const Diretor = connection.define("diretor", {
     nome: {
         type: DataTypes.STRING(130),
