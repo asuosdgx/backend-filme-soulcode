@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { Filme } from "../models/filme.js";
 import { Diretor } from "../models/diretor.js";
-import { Ator } from "../models/ator.js";
 
 export const filmesRoutes = Router()
 
@@ -18,16 +17,15 @@ filmesRoutes.get("/filme/:id", async (request, response)=> {
 })
 
 filmesRoutes.post("/filme", async (request, response) => {
-    const {titulo, descricao, data_lancamento, diretor} = request.body
+    const {titulo, descricao, data_lancamento} = request.body
     
-    if(!titulo || !descricao || !data_lancamento || !diretor){
+    if(!titulo || !descricao || !data_lancamento){
         return response.status(500).json({ status: "error", message: "campos não preenchido"})
     }
 
     try{
         await Filme.create(
-            { titulo, descricao, data_lancamento, diretor},
-            { include: [Diretor] }
+            { titulo, descricao, data_lancamento}
         );
         return response.status(201).json({ message: "Filme criado com sucesso" })
     }catch(err){
@@ -38,14 +36,13 @@ filmesRoutes.post("/filme", async (request, response) => {
 
 filmesRoutes.put("/filme/:id", async (req, res) => {
     const  id  = req.params.id;
-    const { titulo, descricao, data_lancamento, diretor } = req.body;
+    const { titulo, descricao, data_lancamento } = req.body;
     
 
     try {
       const filme = await Filme.findOne({ where: { id: id } });
         
       if (filme) {
-        await Diretor.update(diretor, { where: { filmeId: id } });
         await filme.update({ titulo, descricao, data_lancamento });
         res.json({ message: "Filme atualizado." });
       } else {
