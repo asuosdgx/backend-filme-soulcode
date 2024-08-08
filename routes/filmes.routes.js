@@ -32,11 +32,12 @@ filmesRoutes.post("/filme", async (request, response) => {
         return response.status(201).json({ message: "Filme criado com sucesso" })
     }catch(err){
         return response.status(500).json({ message: "Um erro ocorreu ao inserir filme" })
+        console.log(err)
     }
 })
 
 filmesRoutes.put("/filme/:id", async (req, res) => {
-    const { id } = req.params;
+    const  id  = req.params.id;
     const { titulo, descricao, data_lancamento, diretor } = req.body;
     
 
@@ -45,13 +46,14 @@ filmesRoutes.put("/filme/:id", async (req, res) => {
         
       if (filme) {
         await Diretor.update(diretor, { where: { filmeId: id } });
-        await Filme.update({ titulo, descricao, data_lancamento });
+        await filme.update({ titulo, descricao, data_lancamento });
         res.json({ message: "Filme atualizado." });
       } else {
         res.status(404).json({ message: "Filme não encontrado." });
       }
     } catch (err) {
       res.status(500).json({message: "Ocorreu um erro ao atualizar o filme."});
+      console.log(err)
     }
 })
 

@@ -1,7 +1,7 @@
 import { connection } from "../config/database.js";
 import { DataTypes } from "sequelize";
-import { Diretor } from "./diretor.js";
 import { Ator } from "./ator.js";
+
 
 export const Filme = connection.define("filme", {
     titulo: {
@@ -19,8 +19,4 @@ export const Filme = connection.define("filme", {
 });
 
 
-Filme.hasOne(Diretor, { onDelete: "CASCADE" });
-Diretor.belongsTo(Filme);
 
-Filme.hasMany(Ator, { onDelete: "CASCADE" });
-Ator.belongsTo(Filme)
